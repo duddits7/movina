@@ -1,0 +1,55 @@
+.row.movie
+  -# leftside menu
+  -#.container.col-xs-2
+  -# movie info itself
+  .col-xs-12
+    .row
+      .row
+        .col-xs-10
+          .title
+            = @movie.title
+        .col-xs-2
+          .date
+            = @movie.try(:prod_date).try(:strftime, ('%Y'))
+      - if @movie.title_original
+        .row
+          .col-xs-12
+            .title_original
+              = @movie.title_original
+    %hr
+
+    .row
+      -# cover
+      .container.col-xs-4 
+        - if @movie.covers.any?
+          = image_tag(@movie.covers.first.path, alt: @movie.title, class: 'img-responsive')
+          = render 'covers/thumbs', movie: @movie, buttons: false
+        - else
+          no cover available
+      -# title and such
+      .container.col-xs-6
+        .row
+          .description
+            = t('movie.description')
+            %p
+            = @movie.description
+        %hr
+        .row
+          .container.col-xs-6
+        - if @movie.genres.any?
+          .genre
+            = t('movie.genre')
+            %ul
+              = render @movie.genres
+        - if @movie.countries.any?
+          .country
+            = t('movie.country')
+            %ul
+              = render @movie.countries
+        - if @movie.mpaa
+          .mpaa
+            MPAA:
+            = @movie.mpaa.name
+
+= link_to t('movie.back'), link_back_or_default
+

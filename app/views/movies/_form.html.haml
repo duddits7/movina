@@ -1,0 +1,48 @@
+.row
+  .container.col-md-10
+    = simple_form_for(@movie, html: {multipart: true,  class: 'form-horizontal' }) do |f|
+      .container.col-md-10
+        .row
+          .cover-thumbs.col-md-12
+            -# cover
+            - if @movie.covers.any?
+              = render 'covers/thumbs', movie: @movie, buttons: true
+            - else
+              no cover available
+          = f.file_field :path, label: t('movie.title'), multiple: true, name: 'covers[path][]', class: 'btn-success btn-sm'
+        .row
+          .row
+            .container.col-md-6
+              = f.input :title, label: t('movie.title'), error: 'Username is mandatory, please specify one'
+          .row
+            .container.col-md-6
+              = f.input :title_original, label: t('movie.original')
+          .row
+            .col-md-6
+              = f.input :prod_date, as: :string, 
+                input_html: { value: localize(f.object.prod_date? ? f.object.prod_date : Date.today, format: '%d/%m/%Y') },
+                label: t('movie.cinema_date')
+          .row
+            .col-md-6
+              = f.input :dvd_date, as: :string, 
+                input_html: { value: f.object.dvd_date? ? localize(f.object.dvd_date, format: '%d/%m/%Y') : nil },
+                label: t('movie.dvd_date')
+          .row
+            .col-md-6
+              = f.input :post_date, as: :string,
+                input_html: { value: localize(f.object.post_date, format: '%d/%m/%Y') },
+                label: t('movie.post_date')
+          .row
+            .col-md-6
+              = f.input :description, label: t('movie.description')
+      .container.col-md-2
+        .row
+          = f.association :genres, label: t('movie.genre')
+        .row
+          = f.association :countries, label: t('movie.country')
+        .row
+          = f.association :mpaa, label: :MPAA
+      .row
+        .btn-group
+          = f.button :submit, t('.save'), class: 'btn btn-success btn-sm', title: t('.save_alt')
+          = link_to t('.cancel'), :back || root_path,  title: t('.cancel_alt'), class: 'btn btn-default btn-sm btn-danger'

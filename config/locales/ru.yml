@@ -1,0 +1,64 @@
+ru:
+  kinozal_title: "Томский кинозал"
+  movie:
+    title: Название
+    original: Оригинальное название
+    description: Описание
+    genre: Жанр
+    country: Страна
+  movies:
+    form:
+      save: "Сохранить"
+      save_alt: "Сохранить фильм"
+      cancel: "Вернуться"
+      cancel_alt: "Вернуться без сохранения"
+    edit:
+      movie: "Редактирование фильма"
+    list:
+      nocover: Постер потерялся
+  login: "Войти"
+  signup: "Зарегистрироваться"
+  forgot_password: "Забыли пароль?"
+  change_password: "Заменить пароль"
+  new_password: "Новый пароль"
+  repeat_password: "Повторите пароль"
+  password: "Пароль"
+  email: "Email"
+  remember_me: "Запомнить меня"
+  characters_minimum: "символов минимум"
+  logout: "Выйти"
+  profile: "Профиль"
+  covers:
+    thumbs:
+      delete: "Удалить обложку"
+
+  helpers:
+    links:
+      cancel: "Отмена"
+
+  activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+            password:
+              weak_password: "слишком простой"
+
+  delete:
+    commit: "Да"
+    sure: "Удаляем, насмотрелся?"
+    cancel: "Нет"
+  admin_panel: Админка
+  devise:
+    registrations:
+      edit:
+        back: Оставить как есть
+        cancel_btn: Удалить аккаунт
+        cancel: Нет
+        commit: Да
+        selfkill: Самоубиться?
+  nav:
+    search:
+      placeholder: Искать...
+  search:
+    reset: Сбросить поиск

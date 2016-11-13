@@ -1,0 +1,49 @@
+= form_tag(update_search_movies_path, method: 'post', remote: true, id: 'select-countries-form' ) do
+  = hidden_field_tag('update_filter', 'countries_id_in')
+  = select_tag('q[countries_id_in]', {}, {class: 'select-country form-control', multiple: true})
+
+:javascript
+  $.ajax({
+      url: '/countries',
+      type: 'GET',
+      dataType: 'json',
+      success: fillCountrySelect
+  });
+  $("#select-countries-form").on('change', function() {
+    var msg; msg = $("#select-countries-form").serialize();
+    $.ajax({
+      type: "POST",
+      url: "#{update_search_movies_path}",
+      data: msg
+    })
+      .done( function () {
+        $("#movie-list").load('movies/list');
+      })
+  });
+  function fillCountrySelect (opts) {
+    $(".select-country").select2({
+      theme: 'bootstrap',
+      placeholder: 'страна..',
+      maximumSelectionLength: 4,
+      maximumInputLength: 10,
+      multiple: "multiple",
+      allowClear: "true",
+      data: opts,
+      ajax: {
+          url: '/countries', //URL for searching
+          dataType: "json",
+          delay: 200,
+          data: function (params) {
+              return {
+                  search: params.term, //params send to countries controller
+              };
+          },
+          processResults: function (data) {
+              return {
+                  results: data
+              };
+          },
+          cache: true
+      },
+    });
+  };

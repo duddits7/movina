@@ -1,0 +1,6 @@
+= search_form_for @q, url: search_movies_path, html: {method: :get, class: 'navbar-form'} do |f|
+  .input-group
+    = f.text_field :title_or_title_original_cont, class: 'form-control', placeholder: t('nav.search.placeholder')
+    .input-group-btn
+      %button.btn.btn-default
+        %i.glyphicon.glyphicon-search

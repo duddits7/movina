@@ -1,0 +1,41 @@
+#movie-list.row-fluid.movie-list
+  = paginate @movies, :params => {:controller => 'movies', :action => 'index'}
+  = page_entries_info @movies
+  %table.table
+    %tbody
+      - @movies.each do |movie|
+        %tr
+          %td
+            .col-md-2.img-list
+              - if movie.covers.any?
+                =image_tag(movie.covers.first.path, alt: movie.title, width: '100%')
+              - else
+                =t('.nocover')
+            .col-md-10
+              .row-fluid
+                .col-md-6
+                  %h3= link_to movie.title, movie
+                .col-md-5
+                  = render partial: 'genres_badges', collection: movie.genres, as: :genre, locals: { movie_id: movie.id }
+                .col-md-1
+                  -if can? :manage, movie
+                    .btn-group.btn-group-xs
+                      .btn
+                        %span= link_to '', edit_movie_path(movie), class: 'glyphicon glyphicon-edit'
+                      .btn
+                        %span= link_to '', movie, method: :delete, data: { confirm: t('delete.sure'), commit: t('delete.commit'), cancel: t('delete.cancel')}, class: 'glyphicon glyphicon-trash'
+                  -else
+                    &nbsp;
+              .row-fluid
+                .col-md-12
+                  .h4= movie.title_original
+              .row-fluid
+                .col-md-12
+                  %span= movie.prod_date.strftime('%Y') unless movie.prod_date.nil?
+                  = render partial: 'countries/badge', collection: movie.countries, as: :country, locals: { movie_id: movie.id }
+              .row-fluid
+                .col-md-12= movie.mpaa.name unless movie.mpaa.nil?
+              .row-fluid
+                .col-md-12= movie.description
+  = paginate @movies, :params => {:controller => 'movies', :action => 'index'}
+  = page_entries_info @movies

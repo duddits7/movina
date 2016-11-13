@@ -1,0 +1,6 @@
+%span{:class => "label label-info badge-c-#{country.id}-#{movie_id}"}= country.name
+%span &nbsp;
+:javascript
+  $(".badge-c-#{country.id}-#{movie_id}").click(function (event) {
+      $(".select-country").val("#{country.id}").trigger("change");
+  });

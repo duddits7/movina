@@ -1,0 +1,21 @@
+<%= form_for(@mpaa) do |f| %>
+  <% if @mpaa.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@mpaa.errors.count, "error") %> prohibited this mpaa from being saved:</h2>
+
+      <ul>
+      <% @mpaa.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

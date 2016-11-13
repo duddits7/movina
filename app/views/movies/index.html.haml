@@ -1,0 +1,7 @@
+.row-fluid
+  .col-md-2
+    = render 'left_column'
+  .col-md-8
+    = render partial: 'movies/list', locals: { movies: @movies }
+  .col-md-2
+    = render 'right_column'

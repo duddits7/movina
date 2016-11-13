@@ -1,0 +1,49 @@
+= form_tag(update_search_movies_path, method: 'post', remote: true, id:'select-genres-form' ) do
+  = hidden_field_tag('update_filter', 'genres_id_in')
+  = select_tag('q[genres_id_in]', {}, {class: 'select-genre form-control', multiple: true})
+
+:javascript
+  $.ajax({
+      url: '/genres',
+      type: 'GET',
+      dataType: 'json',
+      success: fillGenreSelect
+  });
+  $("#select-genres-form").on('change', function(evt) {
+    var msg; msg = $("#select-genres-form").serialize();
+    $.ajax({
+      type: "POST",
+      url: "#{update_search_movies_path}",
+      data: msg
+    })
+      .done( function () {
+        $("#movie-list").load('movies/list');
+      })
+  });
+  function fillGenreSelect (opts) {
+    $(".select-genre").select2({
+      theme: 'bootstrap',
+      placeholder: 'жанр..',
+      maximumSelectionLength: 4,
+      maximumInputLength: 10,
+      multiple: "multiple",
+      allowClear: "true",
+      data: opts,
+      ajax: {
+          url: '/genres', //URL for searching
+          dataType: "json",
+          delay: 200,
+          data: function (params) {
+              return {
+                  search: params.term, //params send to genres controller
+              };
+          },
+          processResults: function (data) {
+              return {
+                  results: data
+              };
+          },
+          cache: true
+      },
+    });
+  };

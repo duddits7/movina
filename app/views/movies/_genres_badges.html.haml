@@ -1,0 +1,6 @@
+%span{:class => "label label-info pull-right badge-#{genre.id}-#{movie_id}"}= genre.name
+%span.pull-right &nbsp;
+:javascript
+  $(".badge-#{genre.id}-#{movie_id}").click(function (event) {
+      $(".select-genre").val("#{genre.id}").trigger("change");
+  });

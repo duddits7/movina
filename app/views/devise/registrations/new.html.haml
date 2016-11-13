@@ -1,0 +1,33 @@
+.container
+  .mainbox.col-md-4.col-md-offset-4.col-sm-6{:style => "margin-top:50px;"}
+    .panel.panel-info
+      .panel-heading
+        .panel-title
+          = t('.sign_up')
+        - if devise_mapping.recoverable? && controller_name != 'passwords'
+          %div{:style => "float:right; font-size: 80%; position: relative; top:-10px"}
+            = link_to t('.forgot_password'), new_password_path(resource_name)
+      .panel-body{:style => "padding-top:30px"}
+        #login-alert.alert.alert-danger.col-sm-6{:style => "display:none"}
+        = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+          = devise_error_messages!
+          .input-group{:style => "margin-bottom: 25px"}
+            %span.input-group-addon
+              %i.glyphicon.glyphicon-user
+            = f.text_field :name, class: 'form-control', autofocus: true, :placeholder =>  t('.username')
+          .input-group{:style => "margin-bottom: 25px"}
+            %span.input-group-addon
+              %i.glyphicon.glyphicon-user
+            = f.email_field :email, :class => "form-control", :placeholder => t('.email')
+          .input-group{:style => "margin-bottom: 25px"}
+            %span.input-group-addon
+              %i.glyphicon.glyphicon-lock
+            = f.password_field :password, autocomplete: "on", :class => "form-control", :placeholder => t('.password')
+          .input-group{:style => "margin-bottom: 25px"}
+            %span.input-group-addon
+              %i.glyphicon.glyphicon-lock
+            = f.password_field :password_confirmation, autocomplete: "on", :class => "form-control", :placeholder => t('.repeat_password')
+          .form-group{:style => "margin-top:10px"}
+            .col-sm-12.controls.actions
+              = f.submit t('.sign_up'), :class => 'btn btn-lg btn-primary btn-block'
+

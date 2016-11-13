@@ -1,0 +1,7 @@
+.row
+  .col-xs-12
+    - @movie.covers.each do |c|
+      %a.thumbnail.col-xs-4{ href: c.path, data: { title: @movie.title + " ", footer: @movie.title_original, toggle: "lightbox", gallery: "coverthumbs" } }
+        =image_tag c.path
+        =if buttons
+          =link_to "Delete", cover_path(c), method: :delete, remote: true, class: "btn btn-danger"

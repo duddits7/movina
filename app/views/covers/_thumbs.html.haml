@@ -1,0 +1,9 @@
+.col-xs-12
+  - @movie.covers.each do |c|
+    .col-md-3.thumb
+      %a.thumbnail.col-md-12{ href: c.path, data: { title: @movie.title + " ", footer: @movie.title_original, toggle: "lightbox", gallery: "coverthumbs" } }
+        =image_tag c.path
+      -if buttons
+        =link_to cover_path(c), method: :delete, remote: true, class: "btn btn-danger btn-xs delete-btn", title: t('.delete') do
+          %span{class: "glyphicon glyphicon-trash"}
+

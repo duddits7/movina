@@ -1,0 +1,9 @@
+%p#notice= notice
+%p
+  %strong Path:
+  = @cover.path
+%p
+  =image_tag 'c/c8449_1.jpg'
+= link_to 'Edit', edit_cover_path(@cover)
+|
+= link_to 'Back', covers_path

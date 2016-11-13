@@ -1,0 +1,20 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  title_original: MyString
+  description: MyText
+  prod_date: 2015-09-13 03:51:06
+  post_date: 2015-09-13 03:51:06
+  mpaa_id: 1
+  approved: true
+
+two:
+  title: MyString
+  title_original: MyString
+  description: MyText
+  prod_date: 2015-09-13 03:51:06
+  post_date: 2015-09-13 03:51:06
+  mpaa_id: 1
+  approved: false
+
