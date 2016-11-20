@@ -21,7 +21,6 @@
 /.idea/*
 
 /public/uploads/*
-/config/locals.yml
 
 config/settings.local.yml
 config/settings/*.local.yml

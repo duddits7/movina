@@ -2,12 +2,14 @@ class Movie < ActiveRecord::Base
   resourcify
   has_many :covers
   has_many :media
+  has_many :casts
+  has_many :awards
   has_and_belongs_to_many :genres
   has_and_belongs_to_many :countries
+  belongs_to :mpaa
   accepts_nested_attributes_for :genres
   accepts_nested_attributes_for :countries
   accepts_nested_attributes_for :covers, :allow_destroy => true
-  belongs_to :mpaa
 
   scope :approved, -> { where(approved: true) }
   default_scope -> { order(post_date: :desc) }
